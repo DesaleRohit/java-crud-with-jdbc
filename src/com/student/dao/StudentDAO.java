@@ -2,6 +2,8 @@ package com.student.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import com.student.db.DatabaseConnection;
 import com.student.model.Student;
@@ -26,6 +28,35 @@ public class StudentDAO {
 			
 		} catch (Exception e) {
 			System.out.println("Error Adding Student!!!");
+		}
+	}
+	
+	public void viewStrudents() {
+		try {
+			Connection connection = DatabaseConnection.getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM students";
+			ResultSet resultSet = statement.executeQuery(query);
+			
+			System.out.println("ID  | Name     | Age  | Email");
+			System.out.println("---------------------------------------");
+
+			while (resultSet.next()) {
+			    System.out.println(
+			        resultSet.getInt("id") + "    " +
+			        resultSet.getString("name") + "    " +
+			        resultSet.getInt("age") + "    " +
+			        resultSet.getString("email")
+			    );
+			}
+			System.out.println("\n");
+
+			resultSet.close();
+			statement.close();
+			connection.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error Fetching Students!!!");
 		}
 	}
 }
