@@ -14,7 +14,7 @@ public class MainApp {
 		StudentDAO dao = new StudentDAO();
 		
 		while (true) {
-			
+			System.out.println("\n");
 			System.out.println("1. Add Student");
             System.out.println("2. View All Students");
             System.out.println("3. Search Student");
@@ -36,9 +36,11 @@ public class MainApp {
             	String email = scanner.nextLine();
             	
             	dao.addStudent(new Student(name, age, email));
-            }
-            else if (ch == 2) {
+            } else if (ch == 2) {
             	dao.viewStrudents();
+            } else if (ch == 3) {
+            	System.out.print("Enter ID: ");
+                dao.search(scanner.nextInt());
             }
 		}
 	}

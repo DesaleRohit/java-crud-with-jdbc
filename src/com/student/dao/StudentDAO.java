@@ -49,8 +49,7 @@ public class StudentDAO {
 			        resultSet.getString("email")
 			    );
 			}
-			System.out.println("\n");
-
+		
 			resultSet.close();
 			statement.close();
 			connection.close();
@@ -59,4 +58,28 @@ public class StudentDAO {
 			System.out.println("Error Fetching Students!!!");
 		}
 	}
+	
+	public void search(int id) {
+		try {
+		Connection connection = DatabaseConnection.getConnection();
+		String query = "SELECT * FROM students WHERE id=?";
+	    PreparedStatement pst = connection.prepareStatement(query);
+	    pst.setInt(1, id);
+	    ResultSet resultSet = pst.executeQuery();
+	    
+	    
+	    if(resultSet.next()) {
+	    	System.out.println("ID: " + resultSet.getInt("id"));
+            System.out.println("Name: " + resultSet.getString("name"));
+            System.out.println("Age: " + resultSet.getInt("age"));
+            System.out.println("Email: " + resultSet.getString("email"));
+	    } else {
+	    	System.out.println("Student Not-found!!!");
+	    }
+	    
+		} catch (Exception e) {
+			System.out.println("Error to search student!!!");
+		}
+	}
+	
 }
