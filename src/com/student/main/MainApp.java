@@ -41,6 +41,22 @@ public class MainApp {
             } else if (ch == 3) {
             	System.out.print("Enter ID: ");
                 dao.search(scanner.nextInt());
+            } else if (ch == 4) {
+                System.out.print("ID : ");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Name : ");
+                String name = scanner.nextLine();
+
+                System.out.print("Age : ");
+                int age = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Email : ");
+                String email = scanner.nextLine();
+
+                dao.update(new Student(id, name, age, email));
             }
 		}
 	}

@@ -1,6 +1,7 @@
 package com.student.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -61,11 +62,11 @@ public class StudentDAO {
 	
 	public void search(int id) {
 		try {
-		Connection connection = DatabaseConnection.getConnection();
+        Connection connection = DatabaseConnection.getConnection();
 		String query = "SELECT * FROM students WHERE id=?";
-	    PreparedStatement pst = connection.prepareStatement(query);
-	    pst.setInt(1, id);
-	    ResultSet resultSet = pst.executeQuery();
+	    PreparedStatement ps = connection.prepareStatement(query);
+	    ps.setInt(1, id);
+	    ResultSet resultSet = ps.executeQuery();
 	    
 	    
 	    if(resultSet.next()) {
@@ -79,6 +80,25 @@ public class StudentDAO {
 	    
 		} catch (Exception e) {
 			System.out.println("Error to search student!!!");
+		}
+	}
+	
+	public void update(Student s) {
+		try {
+			Connection connection = DatabaseConnection.getConnection();
+			String query = "UPDATE students SET name=?,age=?,email=? WHERE id=?";
+		    PreparedStatement ps = connection.prepareStatement(query);
+		    
+		    ps.setString(1, s.getName());
+			ps.setInt(2, s.getAge());
+			ps.setString(3, s.getEmail());
+			ps.setInt(4, s.getId());
+			
+			ps.executeUpdate();
+			System.out.println("Student info Updated..");
+		    
+			} catch(Exception e) {
+				System.out.println("Error to Update Student!!!");
 		}
 	}
 	
