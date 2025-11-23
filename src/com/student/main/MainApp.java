@@ -24,49 +24,66 @@ public class MainApp {
             System.out.print("Choice: ");
             
             int ch = scanner.nextInt();
-            
-            if (ch == 1) {
-            	scanner.nextLine();
-            	System.out.println("Name : ");
-            	String name = scanner.nextLine();
-            	System.out.println("Age : ");
-            	int age = scanner.nextInt();
-            	scanner.nextLine();
-            	System.out.println("Email : ");
-            	String email = scanner.nextLine();
-            	
-            	dao.addStudent(new Student(name, age, email));
-            } else if (ch == 2) {
-            	dao.viewStudents();
-            } else if (ch == 3) {
-            	System.out.print("Enter ID: ");
-                dao.search(scanner.nextInt());
-            } else if (ch == 4) {
-                System.out.print("ID : ");
-                int id = scanner.nextInt();
-                scanner.nextLine();
+            scanner.nextLine();   // Clear buffer
 
-                System.out.print("Name : ");
-                String name = scanner.nextLine();
+            switch (ch) {
 
-                System.out.print("Age : ");
-                int age = scanner.nextInt();
-                scanner.nextLine();
+                case 1:  // ADD
+                    System.out.print("Name : ");
+                    String name = scanner.nextLine();
 
-                System.out.print("Email : ");
-                String email = scanner.nextLine();
+                    System.out.print("Age : ");
+                    int age = scanner.nextInt();
+                    scanner.nextLine();
 
-                dao.update(new Student(id, name, age, email));
-            } else if (ch == 5) {
-            	System.out.println("Enter ID to DELETE student : ");
-            	dao.delete(scanner.nextInt());
-            } else if (ch == 6) {
-                System.out.println("Bye!");
-                break;
-            }
+                    System.out.print("Email : ");
+                    String email = scanner.nextLine();
 
-            else {
-                System.out.println("Invalid Choice!");
+                    dao.addStudent(new Student(name, age, email));
+                    break;
+
+                case 2:  // VIEW ALL
+                    dao.viewStudents();
+                    break;
+
+                case 3:  // SEARCH
+                    System.out.print("Enter ID: ");
+                    int searchId = scanner.nextInt();
+                    dao.search(searchId);
+                    break;
+
+                case 4:  // UPDATE
+                    System.out.print("ID : ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.print("Name : ");
+                    String newName = scanner.nextLine();
+
+                    System.out.print("Age : ");
+                    int newAge = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.print("Email : ");
+                    String newEmail = scanner.nextLine();
+
+                    dao.update(new Student(id, newName, newAge, newEmail));
+                    break;
+
+                case 5:  // DELETE
+                    System.out.print("Enter ID to DELETE student : ");
+                    int deleteId = scanner.nextInt();
+                    dao.delete(deleteId);
+                    break;
+
+                case 6:  // EXIT
+                    System.out.println("Bye!");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid Choice!");
+                    break;
             }
 		}
 	}
