@@ -37,7 +37,7 @@ public class MainApp {
             	
             	dao.addStudent(new Student(name, age, email));
             } else if (ch == 2) {
-            	dao.viewStrudents();
+            	dao.viewStudents();
             } else if (ch == 3) {
             	System.out.print("Enter ID: ");
                 dao.search(scanner.nextInt());
@@ -57,6 +57,16 @@ public class MainApp {
                 String email = scanner.nextLine();
 
                 dao.update(new Student(id, name, age, email));
+            } else if (ch == 5) {
+            	System.out.println("Enter ID to DELETE student : ");
+            	dao.delete(scanner.nextInt());
+            } else if (ch == 6) {
+                System.out.println("Bye!");
+                break;
+            }
+
+            else {
+                System.out.println("Invalid Choice!");
             }
 		}
 	}

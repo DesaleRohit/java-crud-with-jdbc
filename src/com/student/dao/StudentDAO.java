@@ -32,7 +32,7 @@ public class StudentDAO {
 		}
 	}
 	
-	public void viewStrudents() {
+	public void viewStudents() {
 		try {
 			Connection connection = DatabaseConnection.getConnection();
 			Statement statement = connection.createStatement();
@@ -100,6 +100,27 @@ public class StudentDAO {
 			} catch(Exception e) {
 				System.out.println("Error to Update Student!!!");
 		}
+	}
+	
+	public void delete(int id) {
+		try {
+			Connection connection = DatabaseConnection.getConnection();
+			String query = "DELETE FROM students WHERE id=?";
+		    PreparedStatement ps = connection.prepareStatement(query);
+		    
+		    ps.setInt(1,id);
+		    
+		    int row  = ps.executeUpdate();
+		    if (row > 0) {
+		    System.out.println("Record Deleted successfully...");
+		    } else {
+		    	System.out.println("Record Not Deleted!!!");
+		    }
+		   
+		} catch (Exception e) {
+			System.out.println("Error to Delete Record!!!");
+		}
+		
 	}
 	
 }
